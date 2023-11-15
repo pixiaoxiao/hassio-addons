@@ -1,6 +1,6 @@
 {
   "name": "Voice Assistant",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "slug": "voice_assistant",
   "description": "a voice assistant",
   "arch": ["armhf", "armv7", "aarch64", "amd64"],
@@ -9,7 +9,7 @@
   "startup": "application",
   "boot": "auto",
   "map": ["share:rw","config:rw","media:rw"],
-  "image": "zhujisheng/{arch}-addon-voice_assistant",
+  "image": "pixiaoxiao/{arch}-addon-voice_assistant",
   "options": {
     "voice_assistant": [{
       "microphone": "local_default",
