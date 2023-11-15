@@ -148,8 +148,8 @@ def recognize_google_cn(flac_data, language="zh-CN", pfilter=0, show_all=False):
 def recognize_baidu_cn(audio_data, language="zh", show_all=False):
     # 将音频数据进行base64编码
     audio_base64 = base64.b64encode(audio_data).decode("utf-8")
-    print("data speech  :", audio_base64, flush=True)
-    print("data len  :", len(audio_data), flush=True)
+    # print("data speech  :", audio_base64, flush=True)
+    # print("data len  :", len(audio_data), flush=True)
     # 构建请求URL
     url = "https://vop.baidu.com/server_api"
     # 构建请求头
@@ -167,7 +167,7 @@ def recognize_baidu_cn(audio_data, language="zh", show_all=False):
         "len": len(audio_data),
         "speech": audio_base64,
     })
-    print("get baidu  token :",token, flush=True)
+    # print("get baidu  token :",token, flush=True)
     # 发送POST请求
     response = requests.post(url, headers=headers, data=data)
     # 解析响应
