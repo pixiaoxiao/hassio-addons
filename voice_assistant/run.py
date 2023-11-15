@@ -148,31 +148,28 @@ def recognize_google_cn(flac_data, language="zh-CN", pfilter=0, show_all=False):
 def recognize_baidu_cn(audio_data, language="zh", show_all=False):
     # 将音频数据进行base64编码
     audio_base64 = base64.b64encode(audio_data).decode("utf-8")
+    print("data speech  :", audio_base64, flush=True)
+    print("data len  :", len(audio_data), flush=True)
     # 构建请求URL
     url = "https://vop.baidu.com/server_api"
     # 构建请求头
     headers = {
         "Content-Type": "application/json",
     }
-    # 构建请求参数
-    params = {
-        "cuid": "your_cuid",  # 你的用户标识，可以随意设置
-        "token": "your_access_token",  # 你的百度语音识别API访问令牌，需要自行获取
-        "dev_pid": 1537,  # 1537表示普通话，可以根据需要修改
-    }
+    token = get_access_token()
     # 构建请求体
-    data = {
+    data = json.dumps({
         "format": "wav",
         "rate": 16000,
         "channel": 1,
-        "token": get_access_token(),
+        "token": token,
         "cuid": "a3354b1e0ffb4a79b99892df16720300 ",
         "len": len(audio_data),
         "speech": audio_base64,
-    }
-
+    })
+    print("get baidu  token :",token, flush=True)
     # 发送POST请求
-    response = requests.post(url, headers=headers, data=json.dumps(data))
+    response = requests.post(url, headers=headers, data=data)
     # 解析响应
     result = json.loads(response.text)
     # 提取识别结果
@@ -232,6 +229,7 @@ def handle_predictions( va_config, va_index ):
         audio = stream_in.read(CHUCK_SIZE*CHUCKS_TO_READ)
         func_on_command_stage1(va_config)
         wav_data = get_wav_data( audio )
+        print( "audio read", flush=True)
         # flac_data = get_flac_data(wav_data)
         # speech_in = recognize_google_cn(flac_data)
         speech_in = recognize_baidu_cn(wav_data)

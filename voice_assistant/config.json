@@ -1,6 +1,6 @@
 {
   "name": "Pxx Voice Assistant",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "slug": "pxx_voice_assistant",
   "description": "a voice assistant",
   "arch": ["armhf", "armv7", "aarch64", "amd64"],
