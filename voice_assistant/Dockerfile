@@ -2,19 +2,6 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 ENV LANG C.UTF-8
-# --build-arg timezone=Asia/Shanghai
-ARG timezone
-ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
-    #    APP_ENV=dev \
-    APP_SYSTEM_ENV=docker \
-    SCAN_CACHEABLE=(true)
-RUN set -ex \
-    #  ---------- some config ----------
-    # - config timezone
-    && ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
-    && echo "${TIMEZONE}" > /etc/timezone \
-    && echo -e "\033[42;37m Build Completed :).\033[0m\n"
-
 
 # Install
 #RUN apt-get update
