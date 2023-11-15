@@ -10,7 +10,7 @@ if [ ! -e /media/voice_assistant ]; then
     cp /audio/* /media/voice_assistant/
 fi
 
-python3 run.py 2>&1
+#python3 run.py 2>&1
 
 #while [[ true ]]; do
 #    sleep 1
