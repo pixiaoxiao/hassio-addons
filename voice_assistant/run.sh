@@ -2,7 +2,7 @@
 
 if [ ! -e /share/voice_assistant ]; then
     mkdir -p /share/voice_assistant
-    cp /process_programs/* /share/voice_assistant 
+    cp /process_programs/* /share/voice_assistant
 fi
 
 if [ ! -e /media/voice_assistant ]; then

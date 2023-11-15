@@ -1,0 +1,41 @@
+---
+version: 2.3.2
+slug: px_voice_assistant
+name: Voice Assistant
+description: Expose Home Assistant folders with SMB/CIFS
+url: https://github.com/pixiaoxiao/hassio-addons/tree/master/voice_assistant
+codenotary: pxx@home-assistant.io
+arch:
+  - aarch64
+hassio_api: true
+audio: true
+boot: auto
+image: pixiaoxiao/{arch}-addon-voice_assistant
+init: false
+map:
+  - config:rw
+  - media:rw
+  - share:rw
+options:
+  voice_assistant:
+    microphone: local_default
+    wake_word_model: /hey-mycroft.pb
+    threshold: 0.4
+    show_match_level_realtime: false
+    on_wake: process_none.on_wake
+    on_command_stage1: process_none.on_command
+    on_command_stage2: process_none.on_react
+    media_player: all
+    tts_service: tts.google_translate_say
+schema:
+  voice_assistant:
+    microphone: local_default
+    wake_word_model: /hey-mycroft.pb
+    threshold: 0.4
+    show_match_level_realtime: false
+    on_wake: process_none.on_wake
+    on_command_stage1: process_none.on_command
+    on_command_stage2: process_none.on_react
+    media_player: all
+    tts_service: tts.google_translate_say
+startup: application

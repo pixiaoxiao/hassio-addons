@@ -38,13 +38,13 @@ RUN set -ex \
 COPY *.pb /
 COPY *.pb.params /
 
-RUN mkdir /process_programs
+#RUN mkdir /process_programs
 COPY /process_programs/* /process_programs/
 
 COPY runner.py /
 COPY run.py /
 
-RUN mkdir /audio
+#RUN mkdir /audio
 COPY ding.wav /audio/
 COPY dong.wav /audio/
 
@@ -53,6 +53,6 @@ RUN chmod a+x /run.py
 
 COPY run.sh /
 RUN chmod a+x /run.sh
-#CMD ["/run.sh"]
+CMD ["/run.sh"]
 
 #CMD ["/run.py"]
