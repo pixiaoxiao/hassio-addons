@@ -1,7 +1,7 @@
 {
-  "name": "Pxx Voice Assistant",
+  "name": "Voice Assistant",
   "version": "2.3.1",
-  "slug": "pxx_voice_assistant",
+  "slug": "voice_assistant",
   "description": "a voice assistant",
   "arch": ["aarch64"],
   "audio": true,
