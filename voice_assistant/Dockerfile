@@ -37,6 +37,7 @@ COPY dong.wav /audio/
 
 # daemon
 RUN chmod a+x /run.py
+RUN chmod a+x /runner.py
 
 COPY run.sh /
 RUN chmod a+x /run.sh
