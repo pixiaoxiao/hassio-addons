@@ -53,6 +53,6 @@ RUN chmod a+x /run.py
 
 COPY run.sh /
 RUN chmod a+x /run.sh
-CMD ["/run.sh"]
+#CMD ["/run.sh"]
 
 #CMD ["/run.py"]
