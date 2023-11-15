@@ -12,6 +12,6 @@
 
 #python3 run.py 2>&1
 
-#while [[ true ]]; do
-#    sleep 1
-#done
+while [[ true ]]; do
+    sleep 1
+done
