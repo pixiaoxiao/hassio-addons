@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import json, time, wave, io, subprocess, re, socket, sys, os
+import json, time, wave, io, subprocess, re, socket, sys, os , requests,base64
 #import dns.resolver
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -145,6 +145,58 @@ def recognize_google_cn(flac_data, language="zh-CN", pfilter=0, show_all=False):
             return ""
         return best_hypothesis["transcript"]
 
+def recognize_baidu_cn(audio_data, language="zh", show_all=False):
+    # 将音频数据进行base64编码
+    audio_base64 = base64.b64encode(audio_data).decode("utf-8")
+    # 构建请求URL
+    url = "https://vop.baidu.com/server_api"
+    # 构建请求头
+    headers = {
+        "Content-Type": "application/json",
+    }
+    # 构建请求参数
+    params = {
+        "cuid": "your_cuid",  # 你的用户标识，可以随意设置
+        "token": "your_access_token",  # 你的百度语音识别API访问令牌，需要自行获取
+        "dev_pid": 1537,  # 1537表示普通话，可以根据需要修改
+    }
+    # 构建请求体
+    data = {
+        "format": "wav",
+        "rate": 16000,
+        "channel": 1,
+        "token": get_access_token(),
+        "cuid": "a3354b1e0ffb4a79b99892df16720300 ",
+        "len": len(audio_data),
+        "speech": audio_base64,
+    }
+
+    # 发送POST请求
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    # 解析响应
+    result = json.loads(response.text)
+    # 提取识别结果
+    if "result" in result:
+        transcript = result["result"][0]
+        if show_all:
+            return result["result"]
+        else:
+            return transcript
+    else:
+        print("Recognition failed. Error message:", result.get("err_msg", ""))
+        return ""
+
+
+def get_access_token():
+    api_key = "3m9HfP1xq929nvzLC8Yby95b"
+    secret_key = "6qHVF04Sgqc73AqUcC5jMjczKi0u705p"
+    """
+    使用 AK，SK 生成鉴权签名（Access Token）
+    :return: access_token，或是None(如果错误)
+    """
+    url = "https://aip.baidubce.com/oauth/2.0/token"
+    params = {"grant_type": "client_credentials", "client_id": api_key, "client_secret": secret_key}
+    return str(requests.post(url, params=params).json().get("access_token"))
 
 def handle_predictions( va_config, va_index ):
   """Continuously check Precise process output"""
@@ -180,8 +232,9 @@ def handle_predictions( va_config, va_index ):
         audio = stream_in.read(CHUCK_SIZE*CHUCKS_TO_READ)
         func_on_command_stage1(va_config)
         wav_data = get_wav_data( audio )
-        flac_data = get_flac_data(wav_data)
-        speech_in = recognize_google_cn(flac_data)
+        # flac_data = get_flac_data(wav_data)
+        # speech_in = recognize_google_cn(flac_data)
+        speech_in = recognize_baidu_cn(wav_data)
         print(microphone, "catch the input speech: ", speech_in, flush=True)
         func_on_command_stage2(speech_in, va_config)
   except Exception as e:
