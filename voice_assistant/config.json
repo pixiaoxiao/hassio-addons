@@ -11,7 +11,7 @@
   "map": ["share:rw","config:rw","media:rw"],
   "image": "pixiaoxiao/{arch}-addon-voice_assistant",
   "options": {
-    "pxx_voice_assistant": [{
+    "voice_assistant": [{
       "microphone": "local_default",
       "wake_word_model": "/hey-mycroft.pb",
       "threshold": 0.4,
@@ -24,7 +24,7 @@
     }]
   },
   "schema": {
-    "pxx_voice_assistant": [{
+    "voice_assistant": [{
       "microphone": "str",
       "wake_word_model": "str",
       "threshold": "float(0,1)",
