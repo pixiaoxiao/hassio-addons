@@ -3,7 +3,7 @@
   "version": "2.3.3",
   "slug": "pxx_voice_assistant",
   "description": "a voice assistant",
-  "arch": ["aarch64"],
+  "arch": ["armhf", "armv7", "aarch64", "amd64"],
   "audio": true,
   "homeassistant_api": true,
   "startup": "application",
