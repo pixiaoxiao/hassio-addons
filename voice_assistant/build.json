@@ -2,7 +2,7 @@
   "build_from": {
     "armhf": "ghcr.io/home-assistant/armhf-base-debian:latest",
     "armv7": "ghcr.io/home-assistant/armv7-base-debian:latest",
-    "aarch64": "zhujisheng/aarch64-addon-voice_assistant:2.2.0",
+    "aarch64": "zhujisheng/aarch64-addon-voice_assistant:latest",
     "amd64": "ghcr.io/home-assistant/amd64-base-debian:latest"
   }
 }
